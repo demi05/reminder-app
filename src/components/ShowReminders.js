@@ -1,11 +1,12 @@
 import { useContextValues } from "./GlobalState";
 import UseFetch from "./UseFetch";
 import "./Reminder.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const ShowReminders = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const {
     data: reminders,
@@ -13,23 +14,18 @@ const ShowReminders = () => {
     error,
   } = UseFetch(`http://localhost:8000/reminders`);
 
-  const { title, color } = useContextValues();
+  const { title, color, clearForm } = useContextValues();
   const divStyle = {
     backgroundColor: color,
   };
 
-  const deleteReminder = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:8000/reminders/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        throw new Error("Failed to delete reminder");
-      }
-      console.log(`Reminder with ID ${id} deleted successfully.`);
-    } catch (error) {
-      console.error("Error deleting reminder:", error);
-    }
+  const deleteReminder = async () => {
+    fetch(`http://localhost:8000/reminders/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      navigate("/reminder");
+      clearForm();
+    });
   };
 
   useEffect(() => {
@@ -54,7 +50,7 @@ const ShowReminders = () => {
     };
 
     if (reminders && reminders.length > 0) {
-      const intervalId = setInterval(checkReminders, 1000); // Check every minute
+      const intervalId = setInterval(checkReminders, 1000); // Check every second
 
       return () => clearInterval(intervalId); // Clean up the interval on component unmount
     }
@@ -68,7 +64,7 @@ const ShowReminders = () => {
       <h2>Reminders</h2>
       {reminders &&
         reminders.map((reminder) => (
-          <div style={divStyle} className="reminder-div" key={id}>
+          <div style={divStyle} className="reminder-div" key={reminder.id}>
             {console.log(reminder)}
             <h2>Title: {reminder.title}</h2>
             <p>Description: {reminder.description}</p>

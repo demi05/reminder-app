@@ -10,7 +10,7 @@ export const GlobalProvider = ({ children }) => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [color, setColor] = useState("#000000");
+  const [color, setColor] = useState("");
   const navigate = useNavigate();
 
   const [submitUrl, setSubmitUrl] = useState(null);
@@ -26,8 +26,8 @@ export const GlobalProvider = ({ children }) => {
       alert("Date must be in the future");
     } else if (title.length > 12) {
       alert("Title must be less than or equal to 12 characters");
-    } else if (description.length > 12) {
-      alert("Description must be less than or equal to 12 characters");
+    } else if (description.length > 32) {
+      alert("Description must be less than or equal to 32 characters");
     } else {
       navigate("/showreminders");
     }
@@ -47,6 +47,14 @@ export const GlobalProvider = ({ children }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleFormData();
+  };
+
+  const clearForm = () => {
+    setTitle("");
+    setDescription("");
+    setDate("");
+    setTime("");
+    setColor("");
   };
 
   return (
@@ -70,6 +78,7 @@ export const GlobalProvider = ({ children }) => {
         setSubmitUrl,
         submitOptions,
         setSubmitOptions,
+        clearForm,
       }}
     >
       {children}
