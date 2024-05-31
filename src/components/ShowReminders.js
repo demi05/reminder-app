@@ -74,7 +74,7 @@ const ShowReminders = () => {
             <p>Description: {reminder.description}</p>
             <p>Date: {reminder.date}</p>
             <p>Time: {reminder.time}</p>
-            <p onClick={() => deleteReminder(reminder.id)}>Delete</p>
+            <p onClick={() => deleteReminder(reminder.id)}>Remove</p>
           </div>
         ))}
     </div>

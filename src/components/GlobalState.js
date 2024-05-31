@@ -11,6 +11,7 @@ export const GlobalProvider = ({ children }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [color, setColor] = useState("#000000");
+  const navigate = useNavigate();
 
   const [submitUrl, setSubmitUrl] = useState(null);
   const [submitOptions, setSubmitOptions] = useState(null);
@@ -23,6 +24,12 @@ export const GlobalProvider = ({ children }) => {
       alert("No field must be empty");
     } else if (inputDateTime < currentDate) {
       alert("Date must be in the future");
+    } else if (title.length > 12) {
+      alert("Title must be less than or equal to 12 characters");
+    } else if (description.length > 12) {
+      alert("Description must be less than or equal to 12 characters");
+    } else {
+      navigate("/showreminders");
     }
 
     const formData = { title, description, date, time, color };

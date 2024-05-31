@@ -1,3 +1,52 @@
 {
-  "reminders": []
+  "reminders": [
+    {
+      "id": "3441",
+      "title": "Eat",
+      "description": "I need to eat soon",
+      "date": "2024-05-31",
+      "time": "09:58",
+      "color": "#ee9b9b"
+    },
+    {
+      "id": "f356",
+      "title": "Eat",
+      "description": "I need to eat soon",
+      "date": "2024-05-31",
+      "time": "09:58",
+      "color": "#ee9b9b"
+    },
+    {
+      "id": "d98f",
+      "title": "eat",
+      "description": "i need to eat soon",
+      "date": "2024-05-31",
+      "time": "10:34",
+      "color": "#dd2c2c"
+    },
+    {
+      "id": "e707",
+      "title": "eat",
+      "description": "i need to eat soon",
+      "date": "2024-05-31",
+      "time": "10:34",
+      "color": "#dd2c2c"
+    },
+    {
+      "id": "e1c7",
+      "title": "ghujikfmnvkb.m,jkbg",
+      "description": "guifyuffghhhhhhhhhhhhhhhhhhhhhhhhhh",
+      "date": "2024-05-31",
+      "time": "10:42",
+      "color": "#f4a4a4"
+    },
+    {
+      "id": "ad72",
+      "title": "ghujikfmnvkb.m,jkbg",
+      "description": "guifyuffghhhhhhhhhhhhhhhhhhhhhhhhhh",
+      "date": "2024-05-31",
+      "time": "10:42",
+      "color": "#f4a4a4"
+    }
+  ]
 }

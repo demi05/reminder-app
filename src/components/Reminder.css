@@ -1,5 +1,7 @@
 header {
+  margin: 0 auto;
   margin-bottom: 3em;
+  width: 80%;
 }
 .content-div {
   display: flex;
@@ -23,14 +25,12 @@ header {
 }
 .form-header h3 {
   text-align: center;
-  /* border: 1px solid blue; */
   margin: 0 auto;
 }
 .form-header a {
   text-decoration: none;
   color: #000;
   background-color: #fff;
-  /* border: 1px solid fuchsia; */
   margin-right: auto;
 }
 .form-header p {
@@ -65,9 +65,6 @@ form .input-div div {
 form .input-div div:first-of-type {
   border-bottom: 1px solid #c7c3c3;
 }
-/* form .input-div label {
-  font-weight: 700;
-} */
 form div input {
   margin-left: auto;
   width: 100%;
@@ -96,4 +93,10 @@ form .input-div:last-of-type input {
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5em;
+}
+.reminder-div p:last-of-type {
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  padding: 0.5em 1em;
+  cursor: pointer;
 }

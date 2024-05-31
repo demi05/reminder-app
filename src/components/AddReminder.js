@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Reminder.css";
 import { useContextValues } from "./GlobalState";
 import UseFetch from "./UseFetch";
@@ -22,16 +22,13 @@ const AddReminder = () => {
     submitOptions,
   } = useContextValues();
 
-  const navigate = useNavigate();
-
   const { data } = UseFetch(submitUrl, submitOptions);
 
   useEffect(() => {
     if (data) {
       console.log("Successfully added reminder");
-      navigate("/showreminders");
     }
-  }, [data, navigate]);
+  }, [data]);
 
   return (
     <div className="form">
@@ -40,12 +37,12 @@ const AddReminder = () => {
           <Link to={"/reminder"}>Cancel</Link>
           <h3>New Reminder</h3>
           <button>
-            <p onClick={handleFormData}>Add</p>
+            <p onClick={handleFormData}>Set Reminder</p>
           </button>
         </div>
         <div className="input-div">
           <div>
-            Title
+            Title(At most 12 characters)
             <input
               type="text"
               value={title}
@@ -53,7 +50,7 @@ const AddReminder = () => {
             />
           </div>
           <div>
-            Description
+            Description(At most 32 characters)
             <input
               type="text"
               value={description}
