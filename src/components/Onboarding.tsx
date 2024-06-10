@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Onboarding.css";
-import { useContextValues } from "./GlobalState";
+import { useContextValues } from "./context/GlobalState";
 
 const Onboarding = () => {
   const { name, setName } = useContextValues();

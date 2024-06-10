@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Onboarding from "./components/Onboarding";
 import Reminder from "./components/Reminder";
-import { GlobalProvider } from "./components/GlobalState";
+import { GlobalProvider } from "./components/context/GlobalState";
 import ShowReminders from "./components/ShowReminders";
 
 function App() {

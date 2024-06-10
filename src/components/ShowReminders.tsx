@@ -1,4 +1,4 @@
-import { useContextValues } from "./GlobalState";
+import { useContextValues } from "./context/GlobalState";
 import UseFetch from "./UseFetch";
 import "./Reminder.css";
 import { useParams, useNavigate } from "react-router-dom";

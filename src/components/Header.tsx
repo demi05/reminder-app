@@ -1,4 +1,4 @@
-import { useContextValues } from "./GlobalState";
+import { useContextValues } from "./context/GlobalState";
 import "./Reminder.css";
 
 const Header = () => {

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Reminder.css";
-import { useContextValues } from "./GlobalState";
+import { useContextValues } from "./context/GlobalState";
 import UseFetch from "./UseFetch";
 import { useEffect } from "react";
 
