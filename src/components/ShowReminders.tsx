@@ -1,31 +1,45 @@
 import { useContextValues } from "./context/GlobalState";
-import UseFetch from "./UseFetch";
 import "./Reminder.css";
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import axios from "axios";
 
 const ShowReminders = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const navigate = useNavigate();
+  const url = "http://localhost:8000/reminders"
 
-  const {
-    data: reminders,
-    loading,
-    error,
-  } = UseFetch(`http://localhost:8000/reminders`);
+  const { title, color, clearForm, reminders, setReminders } = useContext(useContextValues);
 
-  const { title, color, clearForm } = useContextValues();
+  useEffect(() => {
+    const fetchReminders = async () => {
+      try {
+         await axios.get(url). then(res => {
+          setReminders(res.data);
+          console.log("Fetched reminders:", reminders);
+        });
+      } catch (error) {
+        console.error("Error fetching reminders:", error);
+      }
+    };
+
+    fetchReminders();
+  }, [url, setReminders]);
+
   const divStyle = {
     backgroundColor: color,
+    border: "1px solid red"
   };
 
-  const deleteReminder = async () => {
-    fetch(`http://localhost:8000/reminders/${id}`, {
-      method: "DELETE",
-    }).then(() => {
-      navigate("/reminder");
+  const deleteReminder = async (reminderId: number) => {
+    try {
+      await axios.delete(`http://localhost:8000/reminders/${reminderId}`);
+      setReminders(reminders.filter(reminder => reminder.id !== reminderId));
+      // navigate("/reminder");
       clearForm();
-    });
+    } catch (error) {
+      console.error("Error deleting reminder:", error);
+    }
   };
 
   useEffect(() => {
@@ -44,7 +58,7 @@ const ShowReminders = () => {
           const audio = new Audio("../assets/nice_alert_tone.mp3");
           audio.play();
 
-          deleteReminder(reminder.id);
+          // deleteReminder(reminder.id);
         }
       });
     };
@@ -56,8 +70,6 @@ const ShowReminders = () => {
     }
   }, [reminders]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="show-reminders-div">
@@ -65,7 +77,6 @@ const ShowReminders = () => {
       {reminders &&
         reminders.map((reminder) => (
           <div style={divStyle} className="reminder-div" key={reminder.id}>
-            {console.log(reminder)}
             <h2>Title: {reminder.title}</h2>
             <p>Description: {reminder.description}</p>
             <p>Date: {reminder.date}</p>

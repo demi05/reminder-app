@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import "./Reminder.css";
 import { useContextValues } from "./context/GlobalState";
-import UseFetch from "./UseFetch";
-import { useEffect } from "react";
+import axios from "axios";
+// import UseFetch from "./UseFetch";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useContext } from "react";
 
 const AddReminder = () => {
   const {
@@ -17,28 +19,44 @@ const AddReminder = () => {
     color,
     setColor,
     handleFormData,
-    handleSubmit,
-    submitUrl,
-    submitOptions,
-  } = useContextValues();
+    reminders, setReminders
+    // handleSubmit,
+    // submitUrl,
+    // submitOptions,
+  } = useContext(useContextValues);
+  const url = "http://localhost:8000/reminders";
+  function handleChange(e: ChangeEvent<HTMLInputElement>){
+    setTitle(e.target.value)
+  }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log(title);
 
-  const { data } = UseFetch(submitUrl, submitOptions);
+      handleFormData();
 
-  useEffect(() => {
-    if (data) {
-      console.log("Successfully added reminder");
-    }
-  }, [data]);
-
+      try {
+        const res = await axios.post(url, {
+          title,
+          description,
+          date,
+          time,
+          color,
+        });
+        setReminders([res.data]);
+        console.log(title)
+      } catch(error) {
+        console.log("error", error);
+      }
+    };
+  
   return (
     <div className="form">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}  id="reminder-form">
         <div className="form-header">
           <Link to={"/reminder"}>Cancel</Link>
           <h3>New Reminder</h3>
-          <button>
-            <p onClick={handleFormData}>Set Reminder</p>
-          </button>
+          <button type="submit" >Set Reminder</button>
+          
         </div>
         <div className="input-div">
           <div>
@@ -46,7 +64,7 @@ const AddReminder = () => {
             <input
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={/* (e) => setTitle(e.target.value) */ e=>handleChange(e)}
             />
           </div>
           <div>

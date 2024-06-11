@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import "./Onboarding.css";
 import { useContextValues } from "./context/GlobalState";
+import { useContext } from "react";
+
 
 const Onboarding = () => {
-  const { name, setName } = useContextValues();
+  const { name, setName } = useContext(useContextValues);
 
   return (
     <div className="onboarding-div">
@@ -16,7 +18,6 @@ const Onboarding = () => {
           setName(e.target.value);
         }}
       />
-      {console.log(name)}
       <Link to={"./reminder"}>Go</Link>
     </div>
   );
