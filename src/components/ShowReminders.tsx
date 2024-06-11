@@ -1,6 +1,6 @@
 import { useContextValues } from "./context/GlobalState";
 import "./Reminder.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 
@@ -28,14 +28,12 @@ const ShowReminders = () => {
 
   const divStyle = {
     backgroundColor: color,
-    border: "1px solid red"
   };
 
   const deleteReminder = async (reminderId: number) => {
     try {
       await axios.delete(`http://localhost:8000/reminders/${reminderId}`);
       setReminders(reminders.filter(reminder => reminder.id !== reminderId));
-      // navigate("/reminder");
       clearForm();
     } catch (error) {
       console.error("Error deleting reminder:", error);
@@ -57,8 +55,6 @@ const ShowReminders = () => {
           alert(`Reminder: ${title}`);
           const audio = new Audio("../assets/nice_alert_tone.mp3");
           audio.play();
-
-          // deleteReminder(reminder.id);
         }
       });
     };
@@ -73,7 +69,10 @@ const ShowReminders = () => {
 
   return (
     <div className="show-reminders-div">
+      <div className="show-reminders-header">
       <h2>Reminders</h2>
+      <Link to={"/reminder"}>Back to Home</Link>
+      </div>
       {reminders &&
         reminders.map((reminder) => (
           <div style={divStyle} className="reminder-div" key={reminder.id}>

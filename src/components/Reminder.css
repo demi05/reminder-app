@@ -102,3 +102,16 @@ form .input-div:last-of-type input {
   width: 20%;
   text-align: center;
 }
+.show-reminders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.show-reminders-header a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+}
+.show-reminders-header a:hover {
+  text-decoration: underline;
+}
