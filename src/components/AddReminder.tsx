@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import "./Reminder.css";
 import { useContextValues } from "./context/GlobalState";
 import axios from "axios";
-// import UseFetch from "./UseFetch";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent} from "react";
 import { useContext } from "react";
 
 const AddReminder = () => {
@@ -19,10 +18,7 @@ const AddReminder = () => {
     color,
     setColor,
     handleFormData,
-    reminders, setReminders
-    // handleSubmit,
-    // submitUrl,
-    // submitOptions,
+    setReminders
   } = useContext(useContextValues);
   const url = "http://localhost:8000/reminders";
   function handleChange(e: ChangeEvent<HTMLInputElement>){

@@ -1,12 +1,10 @@
 import { useContextValues } from "./context/GlobalState";
 import "./Reminder.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 
 const ShowReminders = () => {
-  // const { id } = useParams();
-  const navigate = useNavigate();
   const url = "http://localhost:8000/reminders"
 
   const { title, color, clearForm, reminders, setReminders } = useContext(useContextValues);
